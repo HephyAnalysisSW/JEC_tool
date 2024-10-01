@@ -161,11 +161,11 @@ def split_line(line):
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("--ymax", type = float, default = 20., help = "y axis max")
+parser.add_argument("--ymax", type = float, default = 10., help = "y axis max")
 parser.add_argument("--ymin", type = float, default = 0., help = "y axis min")
 parser.add_argument("--logx", action = "store_true", default=False, help = "Set log x axis")
 parser.add_argument("--logy", action = "store_true", default=False, help = "Set log y axis")
-parser.add_argument("--legdim", nargs = 4, type = float, default = [0.5, 0.5, 0.9, 0.88], help = "legend dimensions")
+parser.add_argument("--legdim", nargs = 4, type = float, default = [0.1, 0.75, 0.9, 0.88], help = "legend dimensions")
 parser.add_argument("--year", type = str, default = "UL2018", help = "--year = UL2016preVFP/UL2016/UL2017/UL2018")
 parser.add_argument("--output", type = str, default = "output", help = "--output Flavour")
 
@@ -340,6 +340,7 @@ if __name__ == "__main__" :
        c = R.TCanvas("c", "c", 800, 600)
        legdim = args.legdim
        leg = R.TLegend(legdim[0], legdim[1], legdim[2], legdim[3])
+       leg.SetNColumns(4)
        firstplot = True
        for graphname in graphs :
            eta_range = "{}_{}".format(etabin[0], etabin[1])
@@ -367,9 +368,9 @@ if __name__ == "__main__" :
        latex.Draw()
        c.Update()
        plotname = "pt_etabin_{}_{}".format(etabin[0], etabin[1])
-       c.SaveAs("{}{}.root".format(config["outdir"], plotname))
+       #c.SaveAs("{}{}.root".format(config["outdir"], plotname))
        c.SaveAs("{}{}.png".format(config["outdir"], plotname))
-       c.SaveAs("{}{}.pdf".format(config["outdir"], plotname))
+       #c.SaveAs("{}{}.pdf".format(config["outdir"], plotname))
 
 ##############################
 ####### Plotting overlaid histograms vs eta
@@ -387,6 +388,7 @@ if __name__ == "__main__" :
       c = R.TCanvas("c", "c", 800, 600)
       legdim = args.legdim
       leg = R.TLegend(legdim[0], legdim[1], legdim[2], legdim[3])
+      leg.SetNColumns(4)
       firstplot = True
       for histname in hists :
           pt_str = "pt_{}".format(pt)
